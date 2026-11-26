@@ -14,6 +14,8 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 - A friendly "Hi, I'm Manish 👋" with a waving hand, and little logo chips for Fireflies.ai, OYO, Pesto Tech and Claude inside the intro
 - An at-a-glance work list with monospace years and a hover arrow, inspired by modern designer portfolios
 - A scroll hint at the bottom of the first screen
+- An illustrated avatar: a floating badge with a spinning gradient ring in the hero (hover for "That's me!", click for confetti), a small one in the nav, and a "come on in" picture in Contact that opens like a pair of doors
+- Live local time in Gurugram in the footer
 - Every animation switches off for visitors who turn on "reduce motion"
 
 ## What this is
