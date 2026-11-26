@@ -183,7 +183,7 @@ export function Hero() {
 
       {/* Scroll hint: a little mouse with a dot rolling down */}
       <a
-        href="#numbers"
+        href="#explore"
         aria-label="Scroll to the next section"
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-muted transition-colors hover:text-ink sm:flex"
       >
