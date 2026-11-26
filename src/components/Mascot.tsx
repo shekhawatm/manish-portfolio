@@ -211,6 +211,7 @@ export function HeroMascot() {
 
   return (
     <motion.button
+      data-hero-ollie=""
       type="button"
       aria-label={mascot.hello}
       onClick={(e) => {
@@ -238,6 +239,15 @@ export function MascotCompanion() {
   const ids = Object.keys(mascot.lines);
   const [current, setCurrent] = useState("top");
   const [visible, setVisible] = useState(false);
+  // hide the corner Ollie while the hero Ollie is on screen, so there are never two owls at once
+  const [heroOllieOnScreen, setHeroOllieOnScreen] = useState(false);
+  useEffect(() => {
+    const el = document.querySelector("[data-hero-ollie]");
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setHeroOllieOnScreen(e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const [bubble, setBubble] = useState<string | null>(null);
   const [clickMood, setClickMood] = useState<Mood | null>(null);
   const reduce = useReducedMotion();
@@ -285,7 +295,7 @@ export function MascotCompanion() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !heroOllieOnScreen && (
         <motion.div
           // pops up from below the screen edge, then hops every few seconds
           initial={{ opacity: 0, y: 160, scale: 0.5, rotate: 20 }}
