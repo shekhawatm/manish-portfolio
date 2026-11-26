@@ -5,7 +5,7 @@ import { engine, hero, site } from "@/content";
 import { AvatarBadge } from "./Avatar";
 import { RichText } from "./Chips";
 import { Magnetic } from "./Magnetic";
-import { HeroScout } from "./Mascot";
+import { HeroMascot } from "./Mascot";
 import { RoleCycler } from "./RoleCycler";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -28,7 +28,7 @@ function HeroCard() {
           </p>
         </div>
         <span className="whitespace-nowrap rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300">
-          ▲ {hero.card.to - hero.card.from} pts
+          <motion.span aria-hidden="true" className="mr-1 inline-block" animate={{ y: [0, -2, 0], rotate: [0, -10, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}>🚀</motion.span>+{hero.card.to - hero.card.from} pts
         </span>
       </figcaption>
 
@@ -72,9 +72,9 @@ function HeroCard() {
         <span className="h-2 w-2 rounded-full bg-emerald-500" />
         Recruiting since 2016
       </motion.div>
-      {/* Scout, the mascot, perched on the card */}
+      {/* Ollie the owl, perched on the card */}
       <div className="absolute -bottom-14 right-4 z-10">
-        <HeroScout />
+        <HeroMascot />
       </div>
     </motion.figure>
   );
