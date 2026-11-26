@@ -6,6 +6,8 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 
 ## What's new
 
+- **v3, inspired by xiaoyanghu.com and linear.app:** a sealed envelope welcome (once per visit, skippable), a hero you can read in five seconds with logo pills, the avatar on a retro computer, a two-tone intro, a quiet logo row, a side icon rail on wide screens, and featured-project cards on the Built page
+- v2 is saved too: locked branch `archive/v2-pages` and tag `v2.0-pages`
 - **v2: a home page plus five short pages** (Impact, Journey, Approach, Built, Praise), each with its own icon, a calm intro, "on this page" chips and an "Up next" card
 - A brighter butter-cream palette, icon links in the top bar, and a floating icon dock on phones
 - The old one-page version is saved: branch [`archive/v1-single-page`](https://github.com/shekhawatm/manish-portfolio/tree/archive/v1-single-page) (locked) and tag `v1.0-single-page`

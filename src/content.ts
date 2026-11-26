@@ -86,9 +86,20 @@ export const hero = {
   /** The small pill above the headline cycles through these */
   roles: [site.role, "10+ years in talent", "Builder of hiring engines", "People Ops lead", "AI-agent tinkerer", "Culture keeper"],
   greeting: "Hi, I'm Manish",
-  headline: "I build the hiring engine behind fast-scaling remote teams.",
+  headline: "I build hiring engines for fast-scaling remote teams.",
+  /** The hero reads as short lines with little logo pills (names must match the `chips` list). */
+  lines: {
+    lead: "I build hiring engines",
+    from: "“we need someone”",
+    to: "a signed offer",
+    now: ["Fireflies.ai"],
+    before: ["OYO", "Pesto Tech"],
+    next: "your team?",
+  },
+  /** Two-tone intro: the first sentence is dark, the rest is soft grey. */
+  introLead: "10+ years in talent acquisition and people ops.",
   intro:
-    "10+ years in talent acquisition and people ops. I scaled tech hiring at OYO and Pesto Tech, then built the people function at Fireflies.ai from its very first hire. Today I lead recruiting, People Ops and culture for a fully remote team, and I build my own tools with Claude.",
+    "I built the people function at Fireflies.ai from its very first hire, and today lead recruiting, People Ops and culture for a fully remote team. I build my own tools with Claude.",
   primaryCta: { label: "See my journey", href: "/journey" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   card: {
@@ -265,6 +276,7 @@ export const journey = {
     { title: "Visvesvaraya Technological University", detail: "Bachelor of Engineering, First Class with Distinction · top 5% of the class · university athletics", years: "2011 – 2015" },
     { title: "Kendriya Vidyalaya", detail: "High school · School Captain · Student of the Year · Maths Olympiad and quiz winner", years: "2007 – 2010" },
   ],
+  logoRowTitle: "Hired for and alongside teams at",
   companies: ["Fireflies.ai", "OYO", "Pesto Tech", "Amazon", "Flipkart", "Uber", "Swiggy", "Walmart Labs", "Myntra", "Visa"],
 };
 
@@ -329,18 +341,18 @@ export const built = {
   title: "What I've built",
   lead: "Tools my team runs on, built with Claude and AI agents. The previews are illustrations with made-up data.",
   items: [
-    { mock: "payroll", title: "Live payroll tracker", text: "One view of pay, contracts and invoices that flags issues before payday." },
-    { mock: "review", title: "Performance and bonus tool", text: "Enter appraisals and bonuses directly, no spreadsheet reconciling." },
-    { mock: "pipeline", title: "Hiring pipeline tracker", text: "Every role, every candidate and the next step, in one place." },
-    { mock: "report", title: "Daily screening report", text: "Posted automatically every morning." },
-    { mock: "playbook", title: "Playbooks in minutes", text: "Role kits and hiring guides generated with Claude." },
-    { mock: "sourcing", title: "Sourcing hub and calculator", text: "A sourcing hub, plus a compensation calculator anyone can use, no tech skills needed." },
-    { mock: "candidates", title: "Live candidate board", text: "A real-time board hiring managers check instead of asking for updates." },
-    { mock: "boolean", title: "Search-string builder", text: "Turns a job description into ready-to-use search strings for every network, explained in plain English." },
-    { mock: "outreach", title: "Personal outreach at scale", text: "Notes written from each person's own work, with automatic reminders on quiet threads." },
-    { mock: "handover", title: "Handover playbook", text: "Everything the team needs to keep hiring and payroll moving while I'm away." },
-    { mock: "orgchart", title: "Self-updating org chart", text: "Joiners, leavers and managers kept in sync from one master sheet." },
-    { mock: "onboarding", title: "Warm-start onboarding kit", text: "Welcome messages before day one, then check-ins at week one and month one." },
+    { mock: "payroll", featured: false, tags: ["People Ops","Live"], title: "Live payroll tracker", outcome: "", text: "One view of pay, contracts and invoices that flags issues before payday." },
+    { mock: "review", featured: false, tags: ["Performance","No spreadsheets"], title: "Performance and bonus tool", outcome: "", text: "Enter appraisals and bonuses directly, no spreadsheet reconciling." },
+    { mock: "pipeline", featured: true, tags: ["Recruiting","Built with Claude"], title: "Hiring pipeline tracker", outcome: "From scattered sheets to one live view of every role", text: "Every role, every candidate and the next step, in one place." },
+    { mock: "report", featured: false, tags: ["Automation","Daily"], title: "Daily screening report", outcome: "", text: "Posted automatically every morning." },
+    { mock: "playbook", featured: false, tags: ["Claude","Templates"], title: "Playbooks in minutes", outcome: "", text: "Role kits and hiring guides generated with Claude." },
+    { mock: "sourcing", featured: false, tags: ["Sourcing","Self-serve"], title: "Sourcing hub and calculator", outcome: "", text: "A sourcing hub, plus a compensation calculator anyone can use, no tech skills needed." },
+    { mock: "candidates", featured: true, tags: ["Hiring managers","Real-time"], title: "Live candidate board", outcome: "From status pings to a board managers just check", text: "A real-time board hiring managers check instead of asking for updates." },
+    { mock: "boolean", featured: true, tags: ["Sourcing","AI agent"], title: "Search-string builder", outcome: "From a job description to search strings in seconds", text: "Turns a job description into ready-to-use search strings for every network, explained in plain English." },
+    { mock: "outreach", featured: false, tags: ["Outreach","AI agent"], title: "Personal outreach at scale", outcome: "", text: "Notes written from each person's own work, with automatic reminders on quiet threads." },
+    { mock: "handover", featured: false, tags: ["Ops","Playbook"], title: "Handover playbook", outcome: "", text: "Everything the team needs to keep hiring and payroll moving while I'm away." },
+    { mock: "orgchart", featured: false, tags: ["People Ops","Auto-sync"], title: "Self-updating org chart", outcome: "", text: "Joiners, leavers and managers kept in sync from one master sheet." },
+    { mock: "onboarding", featured: false, tags: ["Onboarding","Culture"], title: "Warm-start onboarding kit", outcome: "", text: "Welcome messages before day one, then check-ins at week one and month one." },
   ],
 } as const;
 

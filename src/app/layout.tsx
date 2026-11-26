@@ -47,13 +47,16 @@ export const viewport: Viewport = {
 };
 
 // Runs before paint so there is no flash of the wrong theme.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()`;
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark');if(sessionStorage.getItem('envelope-opened')||window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('env-seen')}catch(e){document.documentElement.classList.add('env-seen')}})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <noscript>
+          <style>{`.envelope-gate{display:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-screen bg-paper text-ink antialiased">
         <a
