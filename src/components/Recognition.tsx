@@ -33,7 +33,7 @@ export function Recognition() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ type: "spring", stiffness: 140, damping: 16, delay: i * 0.1 }}
-              className="group relative w-[78%] shrink-0 snap-start sm:w-auto"
+              className={`group relative w-[78%] shrink-0 snap-start sm:w-auto ${i === 0 ? "glow-ring" : ""}`}
             >
               <div
                 className={`relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[0_24px_60px_-28px_rgba(180,73,42,0.6)] ${

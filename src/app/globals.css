@@ -48,6 +48,7 @@
   --color-card: var(--card);
   --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 }
 
 html {
@@ -95,4 +96,29 @@ body {
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
+}
+
+/* Slowly rotating ember → gold → teal ring, used on the latest award */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.glow-ring::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  background: conic-gradient(from var(--angle), var(--accent), var(--gold), var(--accent-2), var(--accent));
+  animation: spin-angle 5s linear infinite;
+  filter: drop-shadow(0 0 12px color-mix(in oklab, var(--accent) 45%, transparent));
+}
+.glow-ring > * {
+  position: relative;
+  z-index: 1;
+}
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
 }
