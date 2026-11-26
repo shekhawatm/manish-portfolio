@@ -4,6 +4,15 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 
 **Live site: [manish-portfolio-sepia.vercel.app](https://manish-portfolio-sepia.vercel.app)**
 
+## What's new
+
+- Section headings rise in word by word, with an ember → gold → teal underline that draws itself
+- The pill above the headline cycles through roles; hero and contact buttons lean toward your cursor
+- "What I've built" cards tilt in 3D with a spotlight that follows the mouse
+- Confetti when you copy the email or click Scout the mascot
+- A slowly rotating glow ring around the latest award
+- Every animation switches off for visitors who turn on "reduce motion"
+
 ## What this is
 
 A one-page personal site. Next.js + Tailwind + Framer Motion, exported as static files and hosted free on Vercel.
