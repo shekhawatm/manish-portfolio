@@ -17,7 +17,7 @@ export const site = {
   timeZone: "Asia/Kolkata",
   availability: "open to a chat",
   description:
-    "Manish Shekhawat builds the hiring engine behind fast-scaling remote companies. 10+ years in recruiting; Fireflies.ai's first recruiter, now Head of Recruiting & Culture.",
+    "Manish Shekhawat is a talent and people leader with 10+ years of experience. He built the people function at Fireflies.ai from its first hire and now leads recruiting, People Ops and culture for its fully remote team.",
 };
 
 /** Manish's illustrated avatar (images live in /public). */
@@ -36,7 +36,7 @@ export const mascot = {
   lines: {
     top: "Hi! I'm Scout 👋",
     impact: "Those bars only go up.",
-    journey: "Ten years, one craft.",
+    journey: "A decade-plus, one craft.",
     lifecycle: "First hello to fifth anniversary.",
     built: "All made with Claude!",
     focus: "Here's what's next.",
@@ -99,7 +99,7 @@ export const nav = [
 /** Animated counters. Percentages only for Fireflies.ai. */
 export const numbers = {
   title: "By the numbers",
-  lead: "Rates, not headcounts. The ratios are the story.",
+  lead: "A decade-plus of hiring, told in rates rather than headcounts.",
   items: [
     { value: 10, suffix: "+ yrs", label: "in recruiting and people, from agency desks to building a function from scratch" },
     { value: 94, suffix: "%", label: "offer acceptance in 2026 so far, up from 66% in 2021" },
@@ -141,8 +141,8 @@ export const engine = {
 
 /** Career timeline, newest first (from LinkedIn). */
 export const journey = {
-  title: "A decade of hiring, one craft",
-  lead: "From hiring engineers for India's biggest tech companies to building a global people function from zero.",
+  title: "10+ years of hiring, one craft",
+  lead: "From closing senior engineers for India's top tech companies to building a global people function from its first hire.",
   roles: [
     {
       years: "2025 – now",
