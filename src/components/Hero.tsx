@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { engine, hero } from "@/content";
+import { engine, hero, site } from "@/content";
+import { Magnetic } from "./Magnetic";
 import { HeroScout } from "./Mascot";
+import { RoleCycler } from "./RoleCycler";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -115,7 +117,9 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            {hero.eyebrow}
+            <RoleCycler roles={hero.roles} />
+            <span aria-hidden="true">·</span>
+            {site.company}
           </motion.p>
 
           {/* Headline and intro render instantly (no fade) so the page paints fast */}
@@ -134,19 +138,23 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease }}
             className="mt-9 flex flex-wrap gap-3"
           >
-            <a
-              href={hero.primaryCta.href}
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-medium text-paper transition-transform hover:-translate-y-0.5"
-            >
-              {hero.primaryCta.label}
-              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
-            </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-card/60 px-6 py-3 font-medium transition-colors hover:border-ink"
-            >
-              {hero.secondaryCta.label}
-            </a>
+            <Magnetic>
+              <a
+                href={hero.primaryCta.href}
+                className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-medium text-paper shadow-[0_10px_30px_-12px_rgba(0,0,0,0.5)]"
+              >
+                {hero.primaryCta.label}
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href={hero.secondaryCta.href}
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-card/60 px-6 py-3 font-medium transition-colors hover:border-ink"
+              >
+                {hero.secondaryCta.label}
+              </a>
+            </Magnetic>
           </motion.div>
         </div>
 

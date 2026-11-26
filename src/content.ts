@@ -37,6 +37,8 @@ export const mascot = {
 
 export const hero = {
   eyebrow: `${site.role} · ${site.company}`,
+  /** The small pill above the headline cycles through these */
+  roles: [site.role, "Builder of hiring engines", "People Ops lead", "AI-agent tinkerer", "Culture keeper"],
   headline: "I build the hiring engine behind fast-scaling remote teams.",
   intro:
     "I've spent 10+ years in recruiting: agency desks hiring engineers for India's biggest tech companies, then OYO and Pesto Tech, then joining Fireflies.ai as its first recruiter in 2020. Today I lead talent, People Ops and culture for a fully remote team, built with no agencies and no vendor spend. I'm not an engineer by trade, but I build the tools my team needs, with AI agents and Claude.",
