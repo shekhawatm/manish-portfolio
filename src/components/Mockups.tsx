@@ -106,7 +106,7 @@ function Pipeline() {
           <p className="mb-1.5 px-1 text-muted">{title}</p>
           <div className="space-y-1.5">
             {cards.map((c) => (
-              <div key={c} className="rounded-md bg-card px-2 py-1.5 shadow-sm">
+              <div key={c} className="whitespace-nowrap rounded-md bg-card px-2 py-1.5 shadow-sm">
                 {c}
                 <p className="mt-0.5 text-[10px] text-muted">Next: reply</p>
               </div>
