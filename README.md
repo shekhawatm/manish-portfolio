@@ -11,6 +11,9 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 - "What I've built" cards tilt in 3D with a spotlight that follows the mouse
 - Confetti when you copy the email or click Scout the mascot
 - A slowly rotating glow ring around the latest award
+- A friendly "Hi, I'm Manish 👋" with a waving hand, and little logo chips for Fireflies.ai, OYO, Pesto Tech and Claude inside the intro
+- An at-a-glance work list with monospace years and a hover arrow, inspired by modern designer portfolios
+- A scroll hint at the bottom of the first screen
 - Every animation switches off for visitors who turn on "reduce motion"
 
 ## What this is
