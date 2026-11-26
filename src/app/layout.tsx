@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { site } from "@/content";
+import { Shell } from "@/components/Shell";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -26,7 +27,7 @@ const title = `${site.name} · ${site.role}, ${site.company}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title,
+  title: { default: title, template: `%s · ${site.name}` },
   description: site.description,
   openGraph: {
     type: "website",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbf4e8" },
+    { media: "(prefers-color-scheme: light)", color: "#fdf8ea" },
     { media: "(prefers-color-scheme: dark)", color: "#13110f" },
   ],
 };
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        {children}
+        <Shell>{children}</Shell>
       </body>
     </html>
   );

@@ -35,6 +35,7 @@ export const mascot = {
   name: "Ollie",
   hello: "Hi! I'm Ollie the owl. I spot great people for Manish. Click me for a rocket!",
   lines: {
+    explore: "Pick a page, any page 👇",
     top: "Hoo! I'm Ollie 🦉",
     numbers: "Whoa, look at those numbers! 😲",
     impact: "Those bars only go up 🚀",
@@ -51,6 +52,7 @@ export const mascot = {
   } as Record<string, string>,
   /** Ollie's mood in each section of the page */
   moods: {
+    explore: "wink",
     top: "happy",
     numbers: "shocked",
     impact: "excited",
@@ -86,8 +88,8 @@ export const hero = {
   greeting: "Hi, I'm Manish",
   headline: "I build the hiring engine behind fast-scaling remote teams.",
   intro:
-    "With 10+ years in talent acquisition and people operations, I've hired engineers and leaders for India's top tech companies, scaled hiring at OYO and Pesto Tech, and built the people function at Fireflies.ai from its very first hire. Today I lead recruiting, People Ops and culture for a fully remote team spread across continents, with no agencies and no vendor spend. I'm not an engineer by trade, but I build the tools my team runs on, with AI agents and Claude.",
-  primaryCta: { label: "See my journey", href: "#journey" },
+    "10+ years in talent acquisition and people ops. I scaled tech hiring at OYO and Pesto Tech, then built the people function at Fireflies.ai from its very first hire. Today I lead recruiting, People Ops and culture for a fully remote team, and I build my own tools with Claude.",
+  primaryCta: { label: "See my journey", href: "/journey" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   card: {
     title: "Offer acceptance",
@@ -119,14 +121,32 @@ export const work = [
   { org: "Astra HR Services", role: "Technical Recruiter", years: "2016 – 2017", mark: "A", color: "#475569" },
 ];
 
-export const nav = [
-  { label: "Impact", href: "#impact" },
-  { label: "Journey", href: "#journey" },
-  { label: "Built", href: "#built" },
-  { label: "Awards", href: "#recognition" },
-  { label: "Praise", href: "#recommendations" },
-  { label: "Contact", href: "#contact" },
-];
+/**
+ * The site's pages. Home links to each one with an icon tile; the top bar and
+ * the bottom dock use the same list. `icon` names an icon in components/Icons.tsx.
+ */
+export const pages = [
+  { slug: "impact", href: "/impact", label: "Impact", icon: "impact", tint: "accent",
+    title: "Impact, in percentages", lead: "Offer acceptance, speed and candidate experience, year by year.",
+    blurb: "66% → 94% offer acceptance, and the engine behind it." },
+  { slug: "journey", href: "/journey", label: "Journey", icon: "journey", tint: "teal",
+    title: "A decade-plus, one craft", lead: "From technical recruiter to head of recruiting and culture, plus life off the clock.",
+    blurb: "2016 to now: OYO, Pesto Tech, Fireflies.ai and more." },
+  { slug: "approach", href: "/approach", label: "Approach", icon: "approach", tint: "gold",
+    title: "How I hire and build culture", lead: "What I bring, the full hiring lifecycle, and the principles behind it.",
+    blurb: "The lifecycle, my principles and what I'm focused on now." },
+  { slug: "built", href: "/built", label: "Built", icon: "built", tint: "accent",
+    title: "Things I've built", lead: "Tools and playbooks my team runs on, mostly built with AI agents and Claude.",
+    blurb: "Twelve tools and playbooks, shown with made-up data." },
+  { slug: "praise", href: "/praise", label: "Praise", icon: "praise", tint: "teal",
+    title: "Awards and kind words", lead: "Awards, certifications and recommendations from people I've hired.",
+    blurb: "Five Fireflies.ai awards and twelve recommendations." },
+] as const;
+
+export type PageInfo = (typeof pages)[number];
+
+/** Kept for older imports: the same pages as plain links. */
+export const nav = pages.map((p) => ({ label: p.label, href: p.href }));
 
 /** Animated counters. Percentages only for Fireflies.ai. */
 export const numbers = {

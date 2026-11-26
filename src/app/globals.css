@@ -7,17 +7,19 @@
    Palette "Ember & Lagoon" on cream: a warm ember accent, a deep lagoon-teal partner,
    and a touch of gold for highlights. Change them here and the whole site follows. */
 :root {
-  --paper: #fbf4e8;
-  --paper-2: #f3e7d4;
-  --ink: #1f1a15;
-  --muted: #5e5346;
-  --line: #e8d9c2;
-  --accent: #b8432a;
-  --accent-soft: #f7e1d6;
-  --accent-2: #17635e;
-  --accent-2-soft: #d9ece8;
-  --gold: #d99a2b;
-  --card: #fffaf1;
+  --paper: #fdf8ea;
+  --paper-2: #f8efd7;
+  --ink: #2a241c;
+  --muted: #6a5e4e;
+  --line: #efe2c3;
+  --accent: #c0502c;
+  --accent-soft: #fbe5d6;
+  --accent-2: #1b6a62;
+  --accent-2-soft: #dcefe9;
+  --gold: #d9a12a;
+  --butter: #f7dd8d;
+  --butter-soft: #fcf1cc;
+  --card: #fffdf6;
 }
 
 .dark {
@@ -32,6 +34,8 @@
   --accent-2-soft: #16302d;
   --gold: #f2c063;
   --card: #141c1b;
+  --butter: #e9c56a;
+  --butter-soft: #2a2614;
 }
 
 @theme inline {
@@ -45,6 +49,8 @@
   --color-accent-2: var(--accent-2);
   --color-accent-2-soft: var(--accent-2-soft);
   --color-gold: var(--gold);
+  --color-butter: var(--butter);
+  --color-butter-soft: var(--butter-soft);
   --color-card: var(--card);
   --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

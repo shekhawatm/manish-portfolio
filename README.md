@@ -6,6 +6,9 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 
 ## What's new
 
+- **v2: a home page plus five short pages** (Impact, Journey, Approach, Built, Praise), each with its own icon, a calm intro, "on this page" chips and an "Up next" card
+- A brighter butter-cream palette, icon links in the top bar, and a floating icon dock on phones
+- The old one-page version is saved: branch [`archive/v1-single-page`](https://github.com/shekhawatm/manish-portfolio/tree/archive/v1-single-page) (locked) and tag `v1.0-single-page`
 - Section headings rise in word by word, with an ember → gold → teal underline that draws itself
 - The pill above the headline cycles through roles; hero and contact buttons lean toward your cursor
 - "What I've built" cards tilt in 3D with a spotlight that follows the mouse
@@ -27,14 +30,16 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 
 ## What this is
 
-A one-page personal site. Next.js + Tailwind + Framer Motion, exported as static files and hosted free on Vercel.
+A home page with five short subpages (`src/app/<page>/page.tsx`). Next.js + Tailwind + Framer Motion, exported as static files and hosted free on Vercel.
 
 ## Change the words
 
 Every piece of text is in **`src/content.ts`**. Open it, change a sentence, save. You never need to touch the design files.
 
+- Page names, icons, titles and the one-line blurbs on the home tiles are in the `pages` list at the top of `src/content.ts`.
+
 - Hide a section: empty its list (e.g. `certifications: []`). Recommendations stay hidden until you add some.
-- Change the colours: edit `--accent` (ember), `--accent-2` (lagoon teal) and `--gold` in `src/app/globals.css`, for light and dark mode.
+- Change the colours: edit `--accent` (ember), `--accent-2` (lagoon teal), `--gold` and `--butter` in `src/app/globals.css`, for light and dark mode.
 
 ## Edit safely in the browser (no install needed)
 

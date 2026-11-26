@@ -54,14 +54,6 @@ function HeroCard() {
       </div>
       <p className="mt-3 text-xs text-muted">{hero.card.caption}</p>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
-        {hero.card.chips.map((c) => (
-          <span key={c} className="rounded-full bg-accent-2-soft px-3 py-1 text-xs font-medium text-accent-2">
-            {c}
-          </span>
-        ))}
-      </div>
-
       {/* small floating badge */}
       <motion.div
         aria-hidden="true"
@@ -183,7 +175,7 @@ export function Hero() {
 
       {/* Scroll hint: a little mouse with a dot rolling down */}
       <a
-        href="#numbers"
+        href="#explore"
         aria-label="Scroll to the next section"
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-muted transition-colors hover:text-ink sm:flex"
       >

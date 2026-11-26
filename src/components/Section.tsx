@@ -40,9 +40,9 @@ export function Section({
 }) {
   const headingId = `${id}-title`;
   return (
-    <section id={id} aria-labelledby={headingId} className={`py-20 sm:py-28 ${className}`}>
+    <section id={id} aria-labelledby={headingId} className={`py-16 sm:py-20 ${className}`}>
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <h2 id={headingId} className="font-serif text-4xl font-medium tracking-tight sm:text-5xl">
+        <h2 id={headingId} className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
           {/* each word rises out of its own little mask, one after another */}
           {title.split(" ").map((w, i, all) => (
             <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
@@ -70,10 +70,10 @@ export function Section({
         />
         {lead && (
           <Reveal delay={0.15}>
-            <p className="mt-4 max-w-2xl text-lg text-muted">{lead}</p>
+            <p className="mt-4 max-w-2xl text-base text-muted sm:text-lg">{lead}</p>
           </Reveal>
         )}
-        <div className="mt-12">{children}</div>
+        <div className="mt-10">{children}</div>
       </div>
     </section>
   );
