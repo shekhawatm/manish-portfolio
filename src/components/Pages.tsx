@@ -7,10 +7,10 @@
  * - UpNext: the "next page" card at the bottom, so reading flows page to page
  */
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, ChevronRight, House } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BriefcaseBusiness, ChevronRight, Handshake, House, Smile } from "lucide-react";
 import Link from "next/link";
-import { pages, recommendations, type PageInfo } from "@/content";
-import { IconBadge } from "./Icons";
+import { numbers, pages, recommendations, type PageInfo } from "@/content";
+import { IconBadge, tints } from "./Icons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -226,6 +226,44 @@ export function UpNext({ slug }: { slug: PageInfo["slug"] }) {
             go back home
           </Link>
         </p>
+      </div>
+    </section>
+  );
+}
+
+/** Three headline wins right under the hero, so the essentials land before anything else. */
+export function Highlights() {
+  const picks = [
+    { item: numbers.items[0], Icon: BriefcaseBusiness, tint: "gold" },
+    { item: numbers.items[1], Icon: Handshake, tint: "accent" },
+    { item: numbers.items[2], Icon: Smile, tint: "teal" },
+  ];
+  return (
+    <section aria-label="Highlights" className="relative">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <ul className="grid divide-y divide-line overflow-hidden rounded-[28px] border border-line bg-card sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          {picks.map(({ item, Icon, tint }, i) => (
+            <motion.li
+              key={item.label}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease }}
+              className="group flex items-start gap-4 p-6"
+            >
+              <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 ${tints[tint]}`}>
+                <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block font-serif text-3xl font-medium tracking-tight">
+                  {item.value}
+                  {item.suffix}
+                </span>
+                <span className="mt-1 block text-sm leading-snug text-muted">{item.label}</span>
+              </span>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   );
