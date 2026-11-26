@@ -8,7 +8,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-type Flight = { id: number; xs: number[]; ys: number[]; flip: boolean; duration: number; size: number };
+type Flight = { id: number; xs: number[]; ys: number[]; flip: boolean; duration: number; size: number; liftoff?: boolean };
 
 const EVENT = "launch-rocket";
 
@@ -21,6 +21,12 @@ export function launchRocket(x: number, y: number, up = false) {
 let nextId = 1;
 
 function randomFlight(w: number, h: number): Flight {
+  // about 4 in 10 rockets lift straight off from the bottom of the screen with a smoke trail
+  if (Math.random() < 0.4) {
+    const x = w * (0.1 + Math.random() * 0.8);
+    const wob = 20 + Math.random() * 30;
+    return { id: nextId++, xs: [x, x + wob, x - wob / 2], ys: [h + 60, h * 0.45, -100], flip: false, duration: 3.2 + Math.random() * 1.5, size: 30 + Math.random() * 12, liftoff: true };
+  }
   const leftToRight = Math.random() > 0.35;
   const startY = h * (0.55 + Math.random() * 0.4);
   const endY = h * (Math.random() * 0.35);
@@ -84,7 +90,7 @@ function RocketFlight({ f, onDone }: { f: Flight; onDone: () => void }) {
     return (Math.atan2(dy, dx) * 180) / Math.PI + 45;
   };
   const rot = [angle(0), angle(0), angle(1)];
-  const trail = [0.08, 0.16, 0.24, 0.32];
+  const trail = f.liftoff ? [0.1, 0.2, 0.3, 0.4, 0.5, 0.6] : [0.08, 0.16, 0.24, 0.32];
 
   return (
     <>
@@ -92,14 +98,13 @@ function RocketFlight({ f, onDone }: { f: Flight; onDone: () => void }) {
         <motion.span
           key={i}
           className="absolute left-0 top-0 rounded-full"
-          style={{
-            width: 10 - i * 2,
-            height: 10 - i * 2,
-            background: i % 2 ? "var(--gold)" : "var(--accent)",
-            filter: "blur(0.5px)",
-          }}
-          initial={{ x: f.xs[0], y: f.ys[0], opacity: 0 }}
-          animate={{ x: f.xs, y: f.ys, opacity: [0, 0.8, 0.8, 0] }}
+          style={
+            f.liftoff
+              ? { width: 14, height: 14, marginLeft: 6, marginTop: 22, background: i < 2 ? "var(--gold)" : "color-mix(in oklab, var(--muted) 35%, white)", filter: "blur(1.5px)" }
+              : { width: 10 - i * 2, height: 10 - i * 2, background: i % 2 ? "var(--gold)" : "var(--accent)", filter: "blur(0.5px)" }
+          }
+          initial={{ x: f.xs[0], y: f.ys[0], opacity: 0, scale: 0.6 }}
+          animate={{ x: f.xs, y: f.ys, opacity: [0, 0.8, 0.8, 0], scale: f.liftoff ? [0.6, 1.4, 2.2] : 1 }}
           transition={{ duration: f.duration, delay: d, ease: "easeInOut" }}
         />
       ))}

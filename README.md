@@ -21,6 +21,8 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 - An intro that leads with 10+ years in talent and people operations
 - Meet Ollie the owl: the new mascot looks around on its own, follows your cursor, sits higher on screen and launches a rocket back to the top when clicked
 - Little 🚀 rockets zoom across the page every so often, with a sparkly trail
+- Ollie has moods: happy, excited, shocked, in love, winking, sleepy, thinking, proud and dizzy. Each section of the page gives Ollie a different mood, and every click cycles to a new reaction
+- Some rockets now lift straight off from the bottom of the screen with a smoke trail; Ollie's "🚀 Top" button blasts you back up
 - Every animation switches off for visitors who turn on "reduce motion"
 
 ## What this is

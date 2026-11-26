@@ -1,20 +1,21 @@
 "use client";
 
 /**
- * Ollie: an original owl mascot drawn in SVG.
- * - Big eyes follow your cursor; when you stop moving, Ollie glances around on its own.
- * - Blinks, bobs, tilts its head toward where it's looking, flaps a wing to wave.
- * - The companion version pops up from the bottom-right, comments on each section,
- *   and launches a rocket back to the top when clicked.
+ * Ollie: an original owl mascot drawn in SVG, with moods.
+ * - Moods: happy, excited, shocked, love, wink, sleepy, thinking, proud, dizzy (+ neutral).
+ *   Each changes the eyes, brows, mouth, floating extras and the body movement.
+ * - Every section of the page gives Ollie its own mood; every click cycles to a new reaction.
+ * - In neutral mood the eyes follow your cursor, and glance around on their own when you're idle.
  * Respects "reduce motion" through MotionConfig and useReducedMotion.
  */
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { mascot } from "@/content";
 import { burst } from "./Burst";
+import { Brows, Extras, Eyes, Mouth, bodyMotion, type Mood } from "./OwlFace";
 import { launchRocket } from "./Rockets";
 
-export function OwlSvg({ size = 96, waving = false }: { size?: number; waving?: boolean }) {
+export function OwlSvg({ size = 96, waving = false, mood = "neutral" }: { size?: number; waving?: boolean; mood?: Mood }) {
   const ref = useRef<SVGSVGElement>(null);
   const reduce = useReducedMotion();
   const px = useMotionValue(0);
@@ -24,6 +25,7 @@ export function OwlSvg({ size = 96, waving = false }: { size?: number; waving?: 
   const tilt = useTransform(sx, [-4, 4], [-7, 7]);
   const [blink, setBlink] = useState(false);
   const lastMove = useRef(0);
+  const flapping = waving || mood === "excited" || mood === "happy";
 
   // eyes follow the pointer…
   useEffect(() => {
@@ -76,21 +78,7 @@ export function OwlSvg({ size = 96, waving = false }: { size?: number; waving?: 
     return () => clearTimeout(t);
   }, [reduce]);
 
-  const eye = (cx: number) => (
-    <g>
-      <circle cx={cx} cy="54" r="15" fill="#fffaf1" />
-      <circle cx={cx} cy="54" r="15" fill="none" stroke="#f2c063" strokeWidth="2.5" />
-      {blink ? (
-        <path d={`M${cx - 9} 55 q9 5 18 0`} stroke="#1f1a15" strokeWidth="3" fill="none" strokeLinecap="round" />
-      ) : (
-        <motion.g style={{ x: sx, y: sy }}>
-          <circle cx={cx} cy="55" r="8" fill="#1f1a15" />
-          <circle cx={cx + 2.6} cy="52" r="2.6" fill="#fff" />
-          <circle cx={cx - 2.4} cy="58" r="1.2" fill="#fff" opacity="0.8" />
-        </motion.g>
-      )}
-    </g>
-  );
+  const body = bodyMotion[mood];
 
   return (
     <svg ref={ref} width={size} height={size} viewBox="0 0 120 120" aria-hidden="true" className="overflow-visible">
@@ -100,63 +88,69 @@ export function OwlSvg({ size = 96, waving = false }: { size?: number; waving?: 
         animate={reduce ? undefined : { rx: [28, 22, 28] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
       />
+      {/* mood movement (restarts whenever the mood changes) */}
       <motion.g
-        animate={reduce ? undefined : { y: [0, -5, 0] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+        key={mood}
+        style={{ originX: "60px", originY: "100px" }}
+        animate={reduce ? undefined : body.animate}
+        transition={body.transition}
       >
-        {/* left wing */}
-        <path d="M27 66 q-14 16 -4 34 q10 -6 14 -20z" fill="#11504c" />
-        {/* right wing (waves) */}
-        <motion.path
-          d="M93 66 q14 16 4 34 q-10 -6 -14 -20z"
-          fill="#11504c"
-          style={{ originX: "93px", originY: "68px" }}
-          animate={waving && !reduce ? { rotate: [0, -38, -10, -38, 0] } : { rotate: 0 }}
-          transition={{ duration: 1.1, ease: "easeInOut" }}
-        />
-        {/* feet */}
-        <path d="M48 104 l-4 6 M52 104 l0 7 M56 104 l4 6" stroke="#e8893a" strokeWidth="3.4" strokeLinecap="round" />
-        <path d="M64 104 l-4 6 M68 104 l0 7 M72 104 l4 6" stroke="#e8893a" strokeWidth="3.4" strokeLinecap="round" />
-
-        {/* head + body tilt toward where Ollie is looking */}
-        <motion.g style={{ rotate: tilt, originX: "60px", originY: "90px" }}>
-          {/* ear tufts */}
-          <path d="M30 34 L38 12 L50 30z" fill="#17635e" />
-          <path d="M90 34 L82 12 L70 30z" fill="#17635e" />
-          {/* body */}
-          <ellipse cx="60" cy="68" rx="36" ry="40" fill="#17635e" />
-          {/* belly with little feather scallops */}
-          <ellipse cx="60" cy="82" rx="22" ry="22" fill="#d9ece8" />
-          {[0, 1, 2].map((r) =>
-            [-1, 0, 1].map((c) => (
-              <path
-                key={`${r}${c}`}
-                d={`M${52 + c * 8 - (r % 2) * 4} ${74 + r * 8} q4 4 8 0`}
-                stroke="#6cc8bb"
-                strokeWidth="1.8"
-                fill="none"
-                strokeLinecap="round"
-              />
-            )),
-          )}
-          {eye(45)}
-          {eye(75)}
-          {/* brows give a friendly look */}
-          <path d="M34 36 q10 -6 20 0" stroke="#0b3a37" strokeWidth="3" fill="none" strokeLinecap="round" />
-          <path d="M66 36 q10 -6 20 0" stroke="#0b3a37" strokeWidth="3" fill="none" strokeLinecap="round" />
-          {/* beak */}
-          <path d="M55 66 L65 66 L60 75z" fill="#e8893a" />
-          {/* cheeks */}
-          <circle cx="30" cy="66" r="4.5" fill="#f28c7a" opacity="0.55" />
-          <circle cx="90" cy="66" r="4.5" fill="#f28c7a" opacity="0.55" />
-          {/* tiny gold star badge */}
+        {/* gentle idle bob */}
+        <motion.g
+          animate={reduce ? undefined : { y: [0, -5, 0] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {/* left wing (flaps when happy/excited) */}
           <motion.path
-            d="M86 92 l2 4.3 4.7.5-3.5 3.2 1 4.6-4.2-2.4-4.2 2.4 1-4.6-3.5-3.2 4.7-.5z"
-            fill="#f2c063"
-            style={{ originX: "86px", originY: "98px" }}
-            animate={reduce ? undefined : { rotate: [0, 15, -10, 0], scale: [1, 1.15, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            d="M27 66 q-14 16 -4 34 q10 -6 14 -20z"
+            fill="#11504c"
+            style={{ originX: "27px", originY: "68px" }}
+            animate={flapping && !reduce && mood !== "neutral" ? { rotate: [0, 30, 0, 30, 0] } : { rotate: 0 }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
           />
+          {/* right wing (waves) */}
+          <motion.path
+            d="M93 66 q14 16 4 34 q-10 -6 -14 -20z"
+            fill="#11504c"
+            style={{ originX: "93px", originY: "68px" }}
+            animate={flapping && !reduce ? { rotate: [0, -38, -10, -38, 0] } : { rotate: 0 }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}
+          />
+          {/* feet */}
+          <path d="M48 104 l-4 6 M52 104 l0 7 M56 104 l4 6" stroke="#e8893a" strokeWidth="3.4" strokeLinecap="round" />
+          <path d="M64 104 l-4 6 M68 104 l0 7 M72 104 l4 6" stroke="#e8893a" strokeWidth="3.4" strokeLinecap="round" />
+
+          {/* head + body tilt toward where Ollie is looking */}
+          <motion.g style={{ rotate: mood === "neutral" ? tilt : 0, originX: "60px", originY: "90px" }}>
+            {/* ear tufts */}
+            <path d="M30 34 L38 12 L50 30z" fill="#17635e" />
+            <path d="M90 34 L82 12 L70 30z" fill="#17635e" />
+            {/* body */}
+            <ellipse cx="60" cy="68" rx="36" ry="40" fill="#17635e" />
+            {/* belly with little feather scallops */}
+            <ellipse cx="60" cy="84" rx="22" ry="21" fill="#d9ece8" />
+            {[0, 1, 2].map((r) =>
+              [-1, 0, 1].map((c) => (
+                <path
+                  key={`${r}${c}`}
+                  d={`M${52 + c * 8 - (r % 2) * 4} ${86 + r * 6} q4 4 8 0`}
+                  stroke="#6cc8bb"
+                  strokeWidth="1.8"
+                  fill="none"
+                  strokeLinecap="round"
+                />
+              )),
+            )}
+            <Eyes mood={mood} blink={blink} sx={sx} sy={sy} />
+            <Brows mood={mood} />
+            {/* beak */}
+            <path d="M55 66 L65 66 L60 75z" fill="#e8893a" />
+            <Mouth mood={mood} />
+            {/* cheeks: rosier when happy or in love */}
+            <circle cx="30" cy="66" r={mood === "love" || mood === "happy" ? 6 : 4.5} fill="#f28c7a" opacity={mood === "love" ? 0.85 : 0.55} />
+            <circle cx="90" cy="66" r={mood === "love" || mood === "happy" ? 6 : 4.5} fill="#f28c7a" opacity={mood === "love" ? 0.85 : 0.55} />
+          </motion.g>
+          {!reduce && <Extras mood={mood} />}
         </motion.g>
       </motion.g>
     </svg>
@@ -181,44 +175,76 @@ function Bubble({ text, side = "left" }: { text: string; side?: "left" | "top" }
   );
 }
 
-/** Ollie in the hero, perched on the chart card. */
+/** Cycles through Ollie's click reactions. */
+function useReactions() {
+  const [i, setI] = useState(-1);
+  const next = () => {
+    const n = (i + 1) % mascot.reactions.length;
+    setI(n);
+    return mascot.reactions[n];
+  };
+  return next;
+}
+
+/** Ollie in the hero, perched on the chart card. Each click: a new reaction. */
 export function HeroMascot() {
-  const [wave, setWave] = useState(true);
+  const [mood, setMood] = useState<Mood>("happy");
+  const [line, setLine] = useState<string | null>(mascot.lines.top);
+  const nextReaction = useReactions();
+
   useEffect(() => {
-    const t = setTimeout(() => setWave(false), 1400);
+    const t = setTimeout(() => {
+      setMood("neutral");
+      setLine(null);
+    }, 2200);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    if (!line) return;
+    const t = setTimeout(() => {
+      setLine(null);
+      setMood("neutral");
+    }, 2600);
+    return () => clearTimeout(t);
+  }, [line]);
+
   return (
     <motion.button
       type="button"
       aria-label={mascot.hello}
       onClick={(e) => {
-        burst(e.clientX, e.clientY, 18);
-        launchRocket(e.clientX, e.clientY);
-        setWave(true);
-        setTimeout(() => setWave(false), 1200);
+        const r = nextReaction();
+        setMood(r.mood);
+        setLine(r.text);
+        burst(e.clientX, e.clientY, 14);
+        if (r.rocket) launchRocket(e.clientX, e.clientY);
       }}
       initial={{ opacity: 0, y: 40, rotate: -12 }}
       animate={{ opacity: 1, y: 0, rotate: 0 }}
       transition={{ type: "spring", stiffness: 160, damping: 12, delay: 1 }}
       whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.94 }}
+      whileTap={{ scale: 0.92 }}
       className="relative cursor-pointer text-ink"
     >
-      <AnimatePresence>{wave && <Bubble text={mascot.lines.top} side="top" />}</AnimatePresence>
-      <OwlSvg size={110} waving={wave} />
+      <AnimatePresence>{line && <Bubble key={line} text={line} side="top" />}</AnimatePresence>
+      <OwlSvg size={110} mood={mood} />
     </motion.button>
   );
 }
 
-/** Ollie follows you down the page, sitting higher up so it's easy to see. */
+/** Ollie follows you down the page: a different mood for every section, a new reaction on every click. */
 export function MascotCompanion() {
   const ids = Object.keys(mascot.lines);
   const [current, setCurrent] = useState("top");
   const [visible, setVisible] = useState(false);
-  const [wave, setWave] = useState(false);
-  const [showBubble, setShowBubble] = useState(true);
+  const [bubble, setBubble] = useState<string | null>(null);
+  const [clickMood, setClickMood] = useState<Mood | null>(null);
   const reduce = useReducedMotion();
+  const nextReaction = useReactions();
+
+  const sectionMood = (mascot.moods[current] ?? "neutral") as Mood;
+  const mood = clickMood ?? sectionMood;
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
@@ -230,9 +256,8 @@ export function MascotCompanion() {
         for (const e of entries) {
           if (e.isIntersecting) {
             setCurrent(e.target.id);
-            setShowBubble(true);
-            setWave(true);
-            setTimeout(() => setWave(false), 1100);
+            setClickMood(null);
+            setBubble(mascot.lines[e.target.id] ?? null);
           }
         }
       },
@@ -248,12 +273,15 @@ export function MascotCompanion() {
     };
   }, [ids.join()]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // the bubble hides itself after a few seconds so it never gets in the way
+  // the bubble (and any click reaction) fades after a few seconds
   useEffect(() => {
-    if (!showBubble) return;
-    const t = setTimeout(() => setShowBubble(false), 3400);
+    if (!bubble) return;
+    const t = setTimeout(() => {
+      setBubble(null);
+      setClickMood(null);
+    }, 3200);
     return () => clearTimeout(t);
-  }, [showBubble, current]);
+  }, [bubble]);
 
   return (
     <AnimatePresence>
@@ -269,33 +297,45 @@ export function MascotCompanion() {
             damping: 14,
             y: { duration: 6, times: [0, 0.8, 0.9, 1], repeat: Infinity, ease: "easeInOut" },
           }}
-          className="fixed bottom-24 right-3 z-40 text-ink sm:bottom-32 sm:right-8"
+          className="fixed bottom-24 right-3 z-40 flex flex-col items-center text-ink sm:bottom-32 sm:right-8"
         >
-          <AnimatePresence mode="wait">
-            {showBubble && mascot.lines[current] && <Bubble key={current} text={mascot.lines[current]} />}
-          </AnimatePresence>
+          <AnimatePresence mode="wait">{bubble && <Bubble key={bubble} text={bubble} />}</AnimatePresence>
           <motion.button
             type="button"
-            aria-label={`${mascot.name}, the site mascot. Launch back to the top`}
+            aria-label={`${mascot.name}, the site mascot. Click for a reaction`}
             onClick={(e) => {
-              launchRocket(e.clientX, e.clientY, true);
-              setTimeout(() => window.scrollTo({ top: 0 }), 250);
-            }}
-            onMouseEnter={() => {
-              setShowBubble(true);
-              setWave(true);
-              setTimeout(() => setWave(false), 1100);
+              const r = nextReaction();
+              setClickMood(r.mood);
+              setBubble(r.text);
+              burst(e.clientX, e.clientY, 12);
+              if (r.rocket) launchRocket(e.clientX, e.clientY);
             }}
             whileHover={{ scale: 1.1, rotate: -5 }}
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.88 }}
             className="block cursor-pointer drop-shadow-[0_10px_18px_rgba(0,0,0,0.18)]"
           >
             <span className="sm:hidden">
-              <OwlSvg size={72} waving={wave} />
+              <OwlSvg size={72} mood={mood} />
             </span>
             <span className="hidden sm:block">
-              <OwlSvg size={96} waving={wave} />
+              <OwlSvg size={96} mood={mood} />
             </span>
+          </motion.button>
+          {/* little rocket button: blast back to the top */}
+          <motion.button
+            type="button"
+            aria-label="Back to top"
+            onClick={(e) => {
+              launchRocket(e.clientX, e.clientY, true);
+              setClickMood("excited");
+              setBubble("Blast off! 🚀");
+              setTimeout(() => window.scrollTo({ top: 0 }), 250);
+            }}
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.9 }}
+            className="-mt-1 rounded-full border border-line bg-card px-2.5 py-1 text-[11px] font-medium text-muted shadow-sm transition-colors hover:text-ink"
+          >
+            🚀 Top
           </motion.button>
         </motion.div>
       )}
