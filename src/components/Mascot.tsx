@@ -244,7 +244,10 @@ export function MascotCompanion() {
   useEffect(() => {
     const el = document.querySelector("[data-hero-ollie]");
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setHeroOllieOnScreen(e.isIntersecting));
+    // a generous margin hides the corner Ollie *before* the hero one scrolls back in
+    const io = new IntersectionObserver(([e]) => setHeroOllieOnScreen(e.isIntersecting), {
+      rootMargin: "200px 0px 200px 0px",
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -293,9 +296,13 @@ export function MascotCompanion() {
     return () => clearTimeout(t);
   }, [bubble]);
 
+  // While the hero Ollie is near the screen, remove the corner one at once (no exit
+  // animation), so the two owls never overlap, even for a frame, on a phone.
+  if (heroOllieOnScreen) return null;
+
   return (
     <AnimatePresence>
-      {visible && !heroOllieOnScreen && (
+      {visible && (
         <motion.div
           // pops up from below the screen edge, then hops every few seconds
           initial={{ opacity: 0, y: 160, scale: 0.5, rotate: 20 }}
