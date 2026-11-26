@@ -1,6 +1,7 @@
 import { Contact } from "@/components/Contact";
 import { Hero } from "@/components/Hero";
 import { MascotCompanion } from "@/components/Mascot";
+import { Envelope } from "@/components/Envelope";
 import { Explore, Highlights } from "@/components/Pages";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       </main>
       <Contact />
       <MascotCompanion />
+      <Envelope />
     </>
   );
 }

@@ -132,3 +132,8 @@ body {
   border-radius: 999px;
   inset: -3px;
 }
+
+/* the welcome envelope is hidden before paint once it has been opened this visit */
+.env-seen .envelope-gate {
+  display: none !important;
+}
