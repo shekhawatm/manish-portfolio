@@ -32,11 +32,11 @@ export const avatar = {
 
 /** The mascot's name and the lines it says as you scroll past each section. */
 export const mascot = {
-  name: "Scout",
-  hello: "Hi! I'm Scout. I help Manish find great people.",
+  name: "Ollie",
+  hello: "Hi! I'm Ollie the owl. I spot great people for Manish. Click me for a rocket!",
   lines: {
-    top: "Hi! I'm Scout 👋",
-    impact: "Those bars only go up.",
+    top: "Hoo! I'm Ollie 🦉",
+    impact: "Those bars only go up 🚀",
     journey: "A decade-plus, one craft.",
     lifecycle: "First hello to fifth anniversary.",
     built: "All made with Claude!",
@@ -44,7 +44,7 @@ export const mascot = {
     recognition: "No chill. Literally.",
     recommendations: "People like him. A lot.",
     life: "Marathons and home cooking.",
-    contact: "Go on, say hi!",
+    contact: "Go on, say hi! (or click me 🚀)",
   } as Record<string, string>,
 };
 

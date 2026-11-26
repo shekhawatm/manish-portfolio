@@ -6,12 +6,13 @@ import { Focus } from "@/components/Focus";
 import { Hero } from "@/components/Hero";
 import { Journey } from "@/components/Journey";
 import { Lifecycle } from "@/components/Lifecycle";
-import { ScoutCompanion } from "@/components/Mascot";
+import { MascotCompanion } from "@/components/Mascot";
 import { Motion } from "@/components/Motion";
 import { Nav } from "@/components/Nav";
 import { Numbers } from "@/components/Numbers";
 import { Principles } from "@/components/Principles";
 import { Life, Recognition, Recommendations } from "@/components/Recognition";
+import { Rockets } from "@/components/Rockets";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
@@ -34,7 +35,8 @@ export default function Home() {
         <Life />
       </main>
       <Contact />
-      <ScoutCompanion />
+      <MascotCompanion />
+      <Rockets />
     </Motion>
   );
 }
