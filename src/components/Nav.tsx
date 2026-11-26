@@ -1,13 +1,25 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { nav, site } from "@/content";
+import { pages, site } from "@/content";
 import { NavAvatar } from "./Avatar";
+import { icons } from "./Icons";
 import { ThemeToggle } from "./ThemeToggle";
 
+/** Which page are we on? "/" for home, otherwise the page's href. */
+export function useActive() {
+  const path = usePathname() ?? "/";
+  const clean = path.replace(/\.html$/, "").replace(/\/$/, "") || "/";
+  return clean;
+}
+
+/** Top bar: name on the left, icon links in the middle (desktop), theme switch on the right. */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const active = useActive();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -23,56 +35,84 @@ export function Nav() {
       }`}
     >
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="group inline-flex items-center font-serif text-lg font-semibold tracking-tight">
+        <Link href="/" className="group inline-flex items-center font-serif text-lg font-semibold tracking-tight">
           <NavAvatar />
           {site.name}
           <span className="text-accent">.</span>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-1">
-          <ul className="hidden items-center gap-1 md:flex">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="rounded-full px-3 py-2 text-sm text-muted transition-colors hover:bg-paper-2 hover:text-ink"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
+          <ul className="hidden items-center gap-0.5 rounded-full border border-line bg-card/70 p-1 md:flex">
+            {pages.map((p) => {
+              const Icon = icons[p.icon];
+              const on = active === p.href;
+              return (
+                <li key={p.href} className="relative">
+                  {on && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-full bg-butter"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
+                  <Link
+                    href={p.href}
+                    aria-current={on ? "page" : undefined}
+                    className={`group relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm transition-colors ${
+                      on ? "font-medium text-ink" : "text-muted hover:text-ink"
+                    }`}
+                  >
+                    <Icon size={15} strokeWidth={1.9} aria-hidden="true" className="transition-transform group-hover:-rotate-12 group-hover:scale-110" />
+                    {p.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
-          <ThemeToggle />
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full hover:bg-paper-2 md:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((v) => !v)}
+          <a
+            href="#contact"
+            className="ml-2 hidden rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 md:inline-flex"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-              {open ? <path d="M5 5l10 10M15 5L5 15" /> : <path d="M3 6h14M3 10h14M3 14h14" />}
-            </svg>
-          </button>
+            Say hello
+          </a>
+          <ThemeToggle />
         </div>
       </nav>
-
-      {open && (
-        <ul id="mobile-menu" className="border-t border-line bg-paper px-5 pb-4 md:hidden">
-          {nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block border-b border-line py-3 text-lg last:border-0"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
     </header>
+  );
+}
+
+/** Phone-sized screens get a floating icon dock at the bottom instead of a menu. */
+export function Dock() {
+  const active = useActive();
+  const items = [{ href: "/", label: "Home", icon: "home" }, ...pages.map((p) => ({ href: p.href, label: p.label, icon: p.icon }))];
+  return (
+    <nav aria-label="Pages" className="fixed inset-x-0 bottom-3 z-40 flex justify-center px-3 md:hidden">
+      <ul className="flex items-center gap-0.5 rounded-full border border-line bg-card/90 p-1.5 shadow-[0_16px_40px_-18px_rgba(60,40,10,0.45)] backdrop-blur-md">
+        {items.map((it) => {
+          const Icon = icons[it.icon];
+          const on = active === it.href;
+          return (
+            <li key={it.href} className="relative">
+              {on && (
+                <motion.span
+                  layoutId="dock-pill"
+                  className="absolute inset-0 rounded-full bg-butter"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
+              )}
+              <Link
+                href={it.href}
+                aria-current={on ? "page" : undefined}
+                className={`relative flex h-11 flex-col items-center justify-center rounded-full px-2.5 text-[10px] leading-none ${on ? "text-ink" : "text-muted"}`}
+              >
+                <Icon size={18} strokeWidth={1.9} aria-hidden="true" />
+                <span className="mt-1">{it.label}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
