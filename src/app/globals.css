@@ -122,3 +122,7 @@ body {
     --angle: 360deg;
   }
 }
+.glow-ring.rounded-full::before {
+  border-radius: 999px;
+  inset: -3px;
+}
