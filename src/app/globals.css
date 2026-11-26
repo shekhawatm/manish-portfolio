@@ -4,20 +4,20 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------- Design tokens ----------
-   Palette "Ember & Lagoon": a warm ember accent, a deep lagoon-teal partner,
+   Palette "Ember & Lagoon" on cream: a warm ember accent, a deep lagoon-teal partner,
    and a touch of gold for highlights. Change them here and the whole site follows. */
 :root {
-  --paper: #faf6f0;
-  --paper-2: #f2ebe1;
-  --ink: #1b1714;
-  --muted: #5d554d;
-  --line: #e3d9cc;
+  --paper: #fbf4e8;
+  --paper-2: #f3e7d4;
+  --ink: #1f1a15;
+  --muted: #5e5346;
+  --line: #e8d9c2;
   --accent: #b8432a;
   --accent-soft: #f7e1d6;
   --accent-2: #17635e;
   --accent-2-soft: #d9ece8;
   --gold: #d99a2b;
-  --card: #ffffff;
+  --card: #fffaf1;
 }
 
 .dark {

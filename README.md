@@ -16,6 +16,9 @@ Personal portfolio of Manish Shekhawat: hiring, people ops and AI-built HR syste
 - A scroll hint at the bottom of the first screen
 - An illustrated avatar: a floating badge with a spinning gradient ring in the hero (hover for "That's me!", click for confetti), a small one in the nav, and a "come on in" picture in Contact that opens like a pair of doors
 - Live local time in Gurugram in the footer
+- A warmer cream palette, and the welcome illustration now sits in a polaroid frame with washi tape and floating stickers
+- Six more things I've built in "What I've built", each with a made-up preview
+- An intro that leads with 10+ years in talent and people operations
 - Every animation switches off for visitors who turn on "reduce motion"
 
 ## What this is

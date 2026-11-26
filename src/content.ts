@@ -17,7 +17,7 @@ export const site = {
   timeZone: "Asia/Kolkata",
   availability: "open to a chat",
   description:
-    "Manish Shekhawat builds the hiring engine behind fast-scaling remote companies. 10+ years in recruiting; Fireflies.ai's first recruiter, now Head of Recruiting & Culture.",
+    "Manish Shekhawat is a talent and people leader with 10+ years of experience. He built the people function at Fireflies.ai from its first hire and now leads recruiting, People Ops and culture for its fully remote team.",
 };
 
 /** Manish's illustrated avatar (images live in /public). */
@@ -27,6 +27,7 @@ export const avatar = {
   alt: "Illustrated portrait of Manish Shekhawat, smiling with arms wide open in a doorway",
   tooltip: "That's me! 👋",
   caption: "Come on in, the door's always open.",
+  stickers: ["10+ yrs in talent", "Say hi 👋"],
 };
 
 /** The mascot's name and the lines it says as you scroll past each section. */
@@ -36,7 +37,7 @@ export const mascot = {
   lines: {
     top: "Hi! I'm Scout 👋",
     impact: "Those bars only go up.",
-    journey: "Ten years, one craft.",
+    journey: "A decade-plus, one craft.",
     lifecycle: "First hello to fifth anniversary.",
     built: "All made with Claude!",
     focus: "Here's what's next.",
@@ -50,11 +51,11 @@ export const mascot = {
 export const hero = {
   eyebrow: `${site.role} · ${site.company}`,
   /** The small pill above the headline cycles through these */
-  roles: [site.role, "Builder of hiring engines", "People Ops lead", "AI-agent tinkerer", "Culture keeper"],
+  roles: [site.role, "10+ years in talent", "Builder of hiring engines", "People Ops lead", "AI-agent tinkerer", "Culture keeper"],
   greeting: "Hi, I'm Manish",
   headline: "I build the hiring engine behind fast-scaling remote teams.",
   intro:
-    "I've spent 10+ years in recruiting: agency desks hiring engineers for India's biggest tech companies, then OYO and Pesto Tech, then joining Fireflies.ai as its first recruiter in 2020. Today I lead talent, People Ops and culture for a fully remote team, built with no agencies and no vendor spend. I'm not an engineer by trade, but I build the tools my team needs, with AI agents and Claude.",
+    "With 10+ years in talent acquisition and people operations, I've hired engineers and leaders for India's top tech companies, scaled hiring at OYO and Pesto Tech, and built the people function at Fireflies.ai from its very first hire. Today I lead recruiting, People Ops and culture for a fully remote team spread across continents, with no agencies and no vendor spend. I'm not an engineer by trade, but I build the tools my team runs on, with AI agents and Claude.",
   primaryCta: { label: "See my journey", href: "#journey" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   card: {
@@ -99,7 +100,7 @@ export const nav = [
 /** Animated counters. Percentages only for Fireflies.ai. */
 export const numbers = {
   title: "By the numbers",
-  lead: "Rates, not headcounts. The ratios are the story.",
+  lead: "A decade-plus of hiring, told in rates rather than headcounts.",
   items: [
     { value: 10, suffix: "+ yrs", label: "in recruiting and people, from agency desks to building a function from scratch" },
     { value: 94, suffix: "%", label: "offer acceptance in 2026 so far, up from 66% in 2021" },
@@ -141,8 +142,8 @@ export const engine = {
 
 /** Career timeline, newest first (from LinkedIn). */
 export const journey = {
-  title: "A decade of hiring, one craft",
-  lead: "From hiring engineers for India's biggest tech companies to building a global people function from zero.",
+  title: "10+ years of hiring, one craft",
+  lead: "From closing senior engineers for India's top tech companies to building a global people function from its first hire.",
   roles: [
     {
       years: "2025 – now",
@@ -283,6 +284,12 @@ export const built = {
     { mock: "report", title: "Daily screening report", text: "Posted automatically every morning." },
     { mock: "playbook", title: "Playbooks in minutes", text: "Role kits and hiring guides generated with Claude." },
     { mock: "sourcing", title: "Sourcing hub and calculator", text: "A sourcing hub, plus a compensation calculator anyone can use, no tech skills needed." },
+    { mock: "candidates", title: "Live candidate board", text: "A real-time board hiring managers check instead of asking for updates." },
+    { mock: "boolean", title: "Search-string builder", text: "Turns a job description into ready-to-use search strings for every network, explained in plain English." },
+    { mock: "outreach", title: "Personal outreach at scale", text: "Notes written from each person's own work, with automatic reminders on quiet threads." },
+    { mock: "handover", title: "Handover playbook", text: "Everything the team needs to keep hiring and payroll moving while I'm away." },
+    { mock: "orgchart", title: "Self-updating org chart", text: "Joiners, leavers and managers kept in sync from one master sheet." },
+    { mock: "onboarding", title: "Warm-start onboarding kit", text: "Welcome messages before day one, then check-ins at week one and month one." },
   ],
 } as const;
 
