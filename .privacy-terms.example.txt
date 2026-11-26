@@ -1,0 +1,6 @@
+# Copy this file to .privacy-terms.txt (which is git-ignored) and list,
+# one per line, every name or term that must never appear on the site:
+# colleagues, candidates, new hires, executives, vendors, internal tool names.
+# Lines starting with # are ignored.
+Sample Colleague
+Sample Vendor
