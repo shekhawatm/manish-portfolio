@@ -8,6 +8,7 @@
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { mascot } from "@/content";
+import { burst } from "./Burst";
 
 export function ScoutSvg({ size = 96, waving = false }: { size?: number; waving?: boolean }) {
   const ref = useRef<SVGSVGElement>(null);
@@ -137,7 +138,8 @@ export function HeroScout() {
     <motion.button
       type="button"
       aria-label={mascot.hello}
-      onClick={() => {
+      onClick={(e) => {
+        burst(e.clientX, e.clientY, 18);
         setWave(true);
         setTimeout(() => setWave(false), 1200);
       }}

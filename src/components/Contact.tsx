@@ -2,13 +2,17 @@
 
 import { useState } from "react";
 import { contact, site } from "@/content";
+import { burst } from "./Burst";
+import { Magnetic } from "./Magnetic";
 import { Reveal } from "./Section";
 
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
-  async function copy() {
+  async function copy(e: React.MouseEvent<HTMLButtonElement>) {
+    const r = e.currentTarget.getBoundingClientRect();
     try {
       await navigator.clipboard.writeText(contact.email);
+      burst(r.left + r.width / 2, r.top + r.height / 2);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -46,6 +50,7 @@ export function Contact() {
           <p className="mt-6 max-w-xl text-lg text-paper/75">{contact.text}</p>
           <CopyEmail />
           <div className="mt-6 flex flex-wrap gap-3">
+            <Magnetic>
             <a
               href={contact.linkedin}
               target="_blank"
@@ -58,6 +63,8 @@ export function Contact() {
               LinkedIn
               <span className="sr-only">(opens in a new tab)</span>
             </a>
+            </Magnetic>
+            <Magnetic>
             <a
               href={contact.github}
               target="_blank"
@@ -67,6 +74,7 @@ export function Contact() {
               GitHub
               <span className="sr-only">(opens in a new tab)</span>
             </a>
+            </Magnetic>
           </div>
         </Reveal>
       </div>
