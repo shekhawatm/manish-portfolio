@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { pages, site } from "@/content";
@@ -42,7 +43,7 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-1">
-          <ul className="hidden items-center gap-0.5 rounded-full border border-line bg-card/70 p-1 md:flex">
+          <ul className="hidden items-center gap-0.5 rounded-full border border-line bg-card/70 p-1 md:flex xl:hidden">
             {pages.map((p) => {
               const Icon = icons[p.icon];
               const on = active === p.href;
@@ -112,6 +113,58 @@ export function Dock() {
             </li>
           );
         })}
+      </ul>
+    </nav>
+  );
+}
+
+/** Wide screens get a slim icon rail on the left, with a label that slides out on hover. */
+export function Rail() {
+  const active = useActive();
+  const items = [
+    { href: "/", label: "Home", icon: "home" },
+    ...pages.map((p) => ({ href: p.href, label: p.label, icon: p.icon })),
+  ];
+  return (
+    <nav aria-label="Pages" className="fixed left-5 top-1/2 z-40 hidden -translate-y-1/2 xl:block">
+      <ul className="flex flex-col gap-1 rounded-full border border-line bg-card/85 p-1.5 shadow-[0_16px_40px_-20px_rgba(60,40,10,0.4)] backdrop-blur-md">
+        {items.map((it) => {
+          const Icon = icons[it.icon];
+          const on = active === it.href;
+          return (
+            <li key={it.href} className="group relative">
+              {on && (
+                <motion.span
+                  layoutId="rail-pill"
+                  className="absolute inset-0 rounded-full bg-butter"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                />
+              )}
+              <Link
+                href={it.href}
+                aria-current={on ? "page" : undefined}
+                className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-colors ${on ? "text-ink" : "text-muted hover:bg-paper-2 hover:text-ink"}`}
+              >
+                <Icon size={19} strokeWidth={1.9} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-110" />
+                <span className="pointer-events-none absolute left-full ml-3 -translate-x-1 whitespace-nowrap rounded-full bg-ink px-3 py-1 text-xs font-medium text-paper opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+                  {it.label}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
+        <li aria-hidden="true" className="mx-auto my-1 h-px w-6 bg-line" />
+        <li className="group relative">
+          <a
+            href="#contact"
+            className="relative flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-paper-2 hover:text-ink"
+          >
+            <Mail size={19} strokeWidth={1.9} aria-hidden="true" />
+            <span className="pointer-events-none absolute left-full ml-3 -translate-x-1 whitespace-nowrap rounded-full bg-ink px-3 py-1 text-xs font-medium text-paper opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+              Say hello
+            </span>
+          </a>
+        </li>
       </ul>
     </nav>
   );
