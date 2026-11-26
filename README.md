@@ -30,4 +30,5 @@ This site contains no real company data, no names of colleagues or candidates, a
 
 ## Contact
 
-LinkedIn: ADD YOUR LINKEDIN URL
+LinkedIn: https://www.linkedin.com/in/manishshekhawatradar/
+Email ID: shekhawatm57@gmail.com
