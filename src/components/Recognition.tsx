@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { life, openSource, recognition, recommendations } from "@/content";
+import { life, recognition, recommendations } from "@/content";
 import { Reveal, Section } from "./Section";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -335,30 +335,3 @@ export function Life() {
   );
 }
 
-/* ---------------- Open source ---------------- */
-
-export function OpenSource() {
-  return (
-    <Section id="open-source" title={openSource.title}>
-      {openSource.items.map((p) => (
-        <Reveal key={p.name}>
-          <div className="flex flex-col gap-6 rounded-3xl border border-line bg-card p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-            <div>
-              <p className="font-mono text-sm text-accent">github.com/shekhawatm/{p.name}</p>
-              <h3 className="mt-2 font-serif text-2xl font-medium">{p.name}</h3>
-              <p className="mt-2 max-w-xl text-muted">{p.text}</p>
-            </div>
-            <div className="flex shrink-0 gap-3">
-              <a href={p.live} target="_blank" rel="noopener noreferrer" className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5">
-                Try it<span className="sr-only"> (opens in a new tab)</span>
-              </a>
-              <a href={p.repo} target="_blank" rel="noopener noreferrer" className="rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-ink">
-                Code<span className="sr-only"> for {p.name} on GitHub (opens in a new tab)</span>
-              </a>
-            </div>
-          </div>
-        </Reveal>
-      ))}
-    </Section>
-  );
-}

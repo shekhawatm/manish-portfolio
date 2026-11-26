@@ -11,7 +11,7 @@ import { Motion } from "@/components/Motion";
 import { Nav } from "@/components/Nav";
 import { Numbers } from "@/components/Numbers";
 import { Principles } from "@/components/Principles";
-import { Life, OpenSource, Recognition, Recommendations } from "@/components/Recognition";
+import { Life, Recognition, Recommendations } from "@/components/Recognition";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
@@ -32,7 +32,6 @@ export default function Home() {
         <Recognition />
         <Recommendations />
         <Life />
-        <OpenSource />
       </main>
       <Contact />
       <ScoutCompanion />

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { contact, site } from "@/content";
+import { WelcomeCard } from "./Avatar";
 import { burst } from "./Burst";
+import { LocalTime } from "./LocalTime";
 import { Magnetic } from "./Magnetic";
 import { Reveal } from "./Section";
 
@@ -41,7 +43,7 @@ export function Contact() {
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden bg-ink text-paper">
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-48 -left-40 h-[30rem] w-[30rem] rounded-full bg-accent/25 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[26rem] w-[26rem] rounded-full bg-accent-2/30 blur-3xl" />
-      <div className="relative mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-[1.25fr_1fr]">
         <Reveal>
           <h2 id="contact-title" className="font-serif text-5xl font-medium tracking-tight sm:text-7xl">
             {contact.title}
@@ -77,12 +79,16 @@ export function Contact() {
             </Magnetic>
           </div>
         </Reveal>
+        <div className="flex justify-center lg:justify-end">
+          <WelcomeCard />
+        </div>
       </div>
       <footer className="relative border-t border-paper/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-8 text-sm text-paper/60 sm:flex-row sm:justify-between sm:px-8">
           <p>
             © {new Date().getFullYear()} {site.name}
           </p>
+          <LocalTime />
           <p>Vibe-coded with Claude · Deployed on Vercel</p>
         </div>
       </footer>

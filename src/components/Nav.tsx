@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { nav, site } from "@/content";
+import { NavAvatar } from "./Avatar";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
@@ -22,7 +23,8 @@ export function Nav() {
       }`}
     >
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" className="font-serif text-lg font-semibold tracking-tight">
+        <a href="#top" className="group inline-flex items-center font-serif text-lg font-semibold tracking-tight">
+          <NavAvatar />
           {site.name}
           <span className="text-accent">.</span>
         </a>

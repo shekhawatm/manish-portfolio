@@ -13,8 +13,20 @@ export const site = {
   company: "Fireflies.ai",
   location: "Gurugram, India · working with a fully remote, global team",
   url: "https://manish-portfolio-sepia.vercel.app",
+  city: "Gurugram",
+  timeZone: "Asia/Kolkata",
+  availability: "open to a chat",
   description:
     "Manish Shekhawat builds the hiring engine behind fast-scaling remote companies. 10+ years in recruiting; Fireflies.ai's first recruiter, now Head of Recruiting & Culture.",
+};
+
+/** Manish's illustrated avatar (images live in /public). */
+export const avatar = {
+  face: "/avatar-face.jpg",
+  full: "/avatar-full.jpg",
+  alt: "Illustrated portrait of Manish Shekhawat, smiling with arms wide open in a doorway",
+  tooltip: "That's me! 👋",
+  caption: "Come on in, the door's always open.",
 };
 
 /** The mascot's name and the lines it says as you scroll past each section. */
@@ -407,19 +419,6 @@ export const life = {
   languages: "Hindi (native) · English (full professional)",
 };
 
-export const openSource = {
-  title: "Open source",
-  items: [
-    {
-      name: "xray-finder",
-      text: "Builds one precise X-ray search string across 16 networks, with a plain-English explanation of what it does.",
-      repo: "https://github.com/shekhawatm/xray-finder",
-      live: "https://xray-finder.vercel.app",
-    },
-  ],
-  profile: "https://github.com/shekhawatm",
-};
-
 export const contact = {
   title: "Let's talk",
   text: "Building a lean, global team, or rethinking how you hire? I'm always up for a conversation about remote hiring, global compensation or building a people function from scratch.",
@@ -433,5 +432,4 @@ export const needsConfirmation = [
   "Fireflies.ai percentages: confirm they can be public (most are already on LinkedIn)",
   "Offer acceptance 66% → 94% is from LinkedIn; the internal report says 56% → 90% offer-to-join",
   "Recommendation quotes are trimmed excerpts; check you're happy with each",
-  "GitHub: LinkedIn lists github.com/shekhawatm57; the site links github.com/shekhawatm (where xray-finder lives)",
 ];

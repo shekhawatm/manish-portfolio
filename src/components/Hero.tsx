@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { engine, hero, site } from "@/content";
+import { AvatarBadge } from "./Avatar";
 import { RichText } from "./Chips";
 import { Magnetic } from "./Magnetic";
 import { HeroScout } from "./Mascot";
@@ -124,7 +125,8 @@ export function Hero() {
           </motion.p>
 
           {/* Friendly greeting with a waving hand */}
-          <p className="mt-7 flex items-center gap-2 font-serif text-2xl italic text-muted">
+          <p className="mt-7 flex items-center gap-4 font-serif text-2xl italic text-muted">
+            <AvatarBadge size={72} />
             {hero.greeting}
             <motion.span
               aria-hidden="true"
