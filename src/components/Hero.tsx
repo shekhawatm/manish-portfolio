@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { engine, hero, site } from "@/content";
+import { RichText } from "./Chips";
 import { Magnetic } from "./Magnetic";
 import { HeroScout } from "./Mascot";
 import { RoleCycler } from "./RoleCycler";
@@ -71,7 +72,7 @@ function HeroCard() {
         Recruiting since 2016
       </motion.div>
       {/* Scout, the mascot, perched on the card */}
-      <div className="absolute -bottom-12 -left-3 z-10 sm:-left-12">
+      <div className="absolute -bottom-14 right-4 z-10">
         <HeroScout />
       </div>
     </motion.figure>
@@ -122,15 +123,30 @@ export function Hero() {
             {site.company}
           </motion.p>
 
+          {/* Friendly greeting with a waving hand */}
+          <p className="mt-7 flex items-center gap-2 font-serif text-2xl italic text-muted">
+            {hero.greeting}
+            <motion.span
+              aria-hidden="true"
+              className="inline-block origin-[70%_70%] not-italic"
+              animate={{ rotate: [0, 18, -8, 18, -4, 10, 0] }}
+              transition={{ duration: 1.8, delay: 0.8, repeat: Infinity, repeatDelay: 4 }}
+            >
+              👋
+            </motion.span>
+          </p>
+
           {/* Headline and intro render instantly (no fade) so the page paints fast */}
           <h1
             id="hero-title"
-            className="mt-7 font-serif text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-[3.6rem]"
+            className="mt-3 font-serif text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-[3.6rem]"
           >
             {before} <em className="bg-gradient-to-r from-accent to-accent-2 bg-clip-text pr-2 font-normal italic text-transparent">{last}</em>
           </h1>
 
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">{hero.intro}</p>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
+            <RichText text={hero.intro} />
+          </p>
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -162,6 +178,22 @@ export function Hero() {
           <HeroCard />
         </div>
       </div>
+
+      {/* Scroll hint: a little mouse with a dot rolling down */}
+      <a
+        href="#numbers"
+        aria-label="Scroll to the next section"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-muted transition-colors hover:text-ink sm:flex"
+      >
+        <span className="flex h-9 w-6 justify-center rounded-full border-2 border-current pt-1.5">
+          <motion.span
+            className="h-1.5 w-1 rounded-full bg-current"
+            animate={{ y: [0, 10, 0], opacity: [1, 0.2, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </span>
+        Scroll
+      </a>
     </section>
   );
 }

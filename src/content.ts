@@ -39,6 +39,7 @@ export const hero = {
   eyebrow: `${site.role} · ${site.company}`,
   /** The small pill above the headline cycles through these */
   roles: [site.role, "Builder of hiring engines", "People Ops lead", "AI-agent tinkerer", "Culture keeper"],
+  greeting: "Hi, I'm Manish",
   headline: "I build the hiring engine behind fast-scaling remote teams.",
   intro:
     "I've spent 10+ years in recruiting: agency desks hiring engineers for India's biggest tech companies, then OYO and Pesto Tech, then joining Fireflies.ai as its first recruiter in 2020. Today I lead talent, People Ops and culture for a fully remote team, built with no agencies and no vendor spend. I'm not an engineer by trade, but I build the tools my team needs, with AI agents and Claude.",
@@ -52,6 +53,27 @@ export const hero = {
     chips: ["10+ years in hiring", "No agencies, no vendors", "Hiring across continents"],
   },
 };
+
+/**
+ * Little logo chips shown inline wherever these names appear in the intro.
+ * `mark` is the letter on the chip; colours are simple brand-neutral tints.
+ */
+export const chips: Record<string, { mark: string; color: string; href?: string }> = {
+  "Fireflies.ai": { mark: "F", color: "#7c3aed", href: "https://fireflies.ai" },
+  OYO: { mark: "O", color: "#e11d48" },
+  "Pesto Tech": { mark: "P", color: "#0f766e" },
+  Claude: { mark: "✳", color: "#c2410c", href: "https://claude.ai" },
+};
+
+/** Compact "Work" list (newest first), shown above the detailed timeline. */
+export const work = [
+  { org: "Fireflies.ai", role: "Head of Recruiting & Culture", years: "2020 – Now", mark: "F", color: "#7c3aed" },
+  { org: "Pesto Tech", role: "Talent Acquisition Specialist", years: "2019 – 2020", mark: "P", color: "#0f766e" },
+  { org: "OYO", role: "Senior HR, Tech Hiring", years: "2018 – 2019", mark: "O", color: "#e11d48" },
+  { org: "EdTech (stealth)", role: "Co-founder", years: "2018", mark: "E", color: "#ca8a04" },
+  { org: "Anzy Careers", role: "Senior Recruitment Specialist", years: "2017 – 2018", mark: "A", color: "#2563eb" },
+  { org: "Astra HR Services", role: "Technical Recruiter", years: "2016 – 2017", mark: "A", color: "#475569" },
+];
 
 export const nav = [
   { label: "Impact", href: "#impact" },
