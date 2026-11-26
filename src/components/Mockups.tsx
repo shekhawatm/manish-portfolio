@@ -4,7 +4,9 @@
  * invented counts, no pay amounts. Never paste real data or screenshots in.
  */
 
-type Kind = "payroll" | "review" | "pipeline" | "report" | "playbook" | "sourcing";
+type Kind =
+  | "payroll" | "review" | "pipeline" | "report" | "playbook" | "sourcing"
+  | "candidates" | "boolean" | "outreach" | "handover" | "orgchart" | "onboarding";
 
 const labels: Record<Kind, string> = {
   payroll: "Illustration of a payroll tracker with sample rows and status flags",
@@ -13,6 +15,12 @@ const labels: Record<Kind, string> = {
   report: "Illustration of an automated morning screening message",
   playbook: "Illustration of a generated hiring playbook document",
   sourcing: "Illustration of a sourcing search box and a calculator slider",
+  candidates: "Illustration of a live candidate board with stages and next steps",
+  boolean: "Illustration of a search-string builder turning a role into a search",
+  outreach: "Illustration of a personal outreach note with a follow-up reminder",
+  handover: "Illustration of a handover checklist",
+  orgchart: "Illustration of a small org chart",
+  onboarding: "Illustration of a welcome message and onboarding check-ins",
 };
 
 function Frame({ kind, children }: { kind: Kind; children: React.ReactNode }) {
@@ -173,6 +181,125 @@ function Sourcing() {
   );
 }
 
+function Candidates() {
+  const rows = [
+    ["Sample Engineer A", "Tech round", "Tomorrow", "ok"],
+    ["Sample Engineer B", "Assignment", "Due Fri", "warn"],
+    ["Sample Engineer C", "Final chat", "Booked", "ok"],
+  ] as const;
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between text-muted">
+        <span>Engineering · live</span>
+        <span className="flex items-center gap-1">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" /> updated now
+        </span>
+      </div>
+      {rows.map(([n, s, d, t]) => (
+        <div key={n} className="grid grid-cols-[1fr_auto_auto] items-center gap-2 rounded-lg bg-card px-2.5 py-1.5">
+          <span className="truncate">{n}</span>
+          <span className="text-muted">{s}</span>
+          <Pill tone={t}>{d}</Pill>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function BooleanBuilder() {
+  return (
+    <div className="space-y-2">
+      <div className="rounded-lg bg-card px-2.5 py-2">
+        <span className="text-muted">Role</span>
+        <p className="mt-0.5 font-medium">Senior Backend Engineer · remote</p>
+      </div>
+      <div className="rounded-lg bg-ink px-2.5 py-2 font-mono text-[10px] leading-snug text-paper">
+        (&quot;backend&quot; OR &quot;platform&quot;) AND (Go OR Rust) AND remote -recruiter
+      </div>
+      <div className="flex gap-1">
+        {["Network A", "Network B", "Network C"].map((n) => (
+          <span key={n} className="rounded-full bg-accent-2-soft px-2 py-0.5 text-accent-2">{n}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Outreach() {
+  return (
+    <div className="space-y-2">
+      <div className="rounded-lg bg-card px-2.5 py-2">
+        <p className="text-muted">To: Sample Candidate</p>
+        <p className="mt-1">Loved your talk on sample topic. We&apos;re building something you might enjoy…</p>
+      </div>
+      <div className="flex items-center gap-2 rounded-lg border border-dashed border-line px-2.5 py-1.5">
+        <span className="text-gold">⏰</span>
+        <span>No reply in 4 days · reminder queued</span>
+      </div>
+    </div>
+  );
+}
+
+function Handover() {
+  const items = [
+    ["Open roles and next steps", true],
+    ["Payroll run owner", true],
+    ["Candidate follow-ups", true],
+    ["Who to call for what", false],
+  ] as const;
+  return (
+    <div className="space-y-1.5">
+      <p className="font-serif text-sm font-medium">Handover · sample week</p>
+      {items.map(([t, done]) => (
+        <div key={t} className="flex items-center gap-2">
+          <span className={`flex h-3.5 w-3.5 items-center justify-center rounded ${done ? "bg-accent-2 text-white" : "border border-line"}`}>
+            {done ? "✓" : ""}
+          </span>
+          <span className={done ? "" : "text-muted"}>{t}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function OrgChart() {
+  const Node = ({ label, tone }: { label: string; tone: string }) => (
+    <span className={`rounded-md px-2 py-1 text-center text-[10px] font-medium ${tone}`}>{label}</span>
+  );
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <Node label="Lead A" tone="bg-accent text-white" />
+      <span className="h-3 w-px bg-line" />
+      <div className="flex gap-2">
+        <Node label="Lead B" tone="bg-card" />
+        <Node label="Lead C" tone="bg-card" />
+        <Node label="Lead D" tone="bg-card" />
+      </div>
+      <div className="flex gap-1.5">
+        <Node label="+ joiner" tone="bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" />
+        <Node label="synced ✓" tone="bg-accent-2-soft text-accent-2" />
+      </div>
+    </div>
+  );
+}
+
+function Onboarding() {
+  return (
+    <div className="space-y-2">
+      <div className="rounded-lg bg-card px-2.5 py-2">
+        <p>👋 Welcome, Sample Joiner! Here&apos;s everything for day one…</p>
+      </div>
+      <div className="flex items-center gap-1">
+        {["Day 1", "Week 1", "Month 1", "Graduate"].map((s, i) => (
+          <span key={s} className={`flex-1 rounded-md py-1 text-center ${i < 2 ? "bg-accent text-white" : "bg-paper-2 text-muted"}`}>
+            {s}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const map: Record<Kind, () => React.ReactElement> = {
   payroll: Payroll,
   review: Review,
@@ -180,6 +307,12 @@ const map: Record<Kind, () => React.ReactElement> = {
   report: Report,
   playbook: Playbook,
   sourcing: Sourcing,
+  candidates: Candidates,
+  boolean: BooleanBuilder,
+  outreach: Outreach,
+  handover: Handover,
+  orgchart: OrgChart,
+  onboarding: Onboarding,
 };
 
 export function Mockup({ kind }: { kind: Kind }) {

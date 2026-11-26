@@ -27,6 +27,7 @@ export const avatar = {
   alt: "Illustrated portrait of Manish Shekhawat, smiling with arms wide open in a doorway",
   tooltip: "That's me! 👋",
   caption: "Come on in, the door's always open.",
+  stickers: ["10+ yrs in talent", "Say hi 👋"],
 };
 
 /** The mascot's name and the lines it says as you scroll past each section. */
@@ -283,6 +284,12 @@ export const built = {
     { mock: "report", title: "Daily screening report", text: "Posted automatically every morning." },
     { mock: "playbook", title: "Playbooks in minutes", text: "Role kits and hiring guides generated with Claude." },
     { mock: "sourcing", title: "Sourcing hub and calculator", text: "A sourcing hub, plus a compensation calculator anyone can use, no tech skills needed." },
+    { mock: "candidates", title: "Live candidate board", text: "A real-time board hiring managers check instead of asking for updates." },
+    { mock: "boolean", title: "Search-string builder", text: "Turns a job description into ready-to-use search strings for every network, explained in plain English." },
+    { mock: "outreach", title: "Personal outreach at scale", text: "Notes written from each person's own work, with automatic reminders on quiet threads." },
+    { mock: "handover", title: "Handover playbook", text: "Everything the team needs to keep hiring and payroll moving while I'm away." },
+    { mock: "orgchart", title: "Self-updating org chart", text: "Joiners, leavers and managers kept in sync from one master sheet." },
+    { mock: "onboarding", title: "Warm-start onboarding kit", text: "Welcome messages before day one, then check-ins at week one and month one." },
   ],
 } as const;
 
