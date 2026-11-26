@@ -19,6 +19,7 @@ const TrophyIcon = ({ size = 22 }: { size?: number }) => (
 export function Recognition() {
   const featured = recognition.awards.filter((a) => a.featured);
   const more = recognition.awards.filter((a) => !a.featured);
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <Section id="recognition" title={recognition.title} lead={recognition.lead} className="overflow-x-clip bg-paper-2">
@@ -76,7 +77,7 @@ export function Recognition() {
           <div className="h-full rounded-3xl border border-line bg-card p-7">
             <h3 className="font-serif text-2xl font-medium">More honours</h3>
             <ol className="mt-5 space-y-1">
-              {more.map((a, i) => (
+              {(showAll ? more : more.slice(0, 3)).map((a, i) => (
                 <motion.li
                   key={a.title + a.date}
                   initial={{ opacity: 0, x: -20 }}
@@ -97,6 +98,16 @@ export function Recognition() {
                 </motion.li>
               ))}
             </ol>
+            {more.length > 3 && (
+              <button
+                type="button"
+                onClick={() => setShowAll((v) => !v)}
+                aria-expanded={showAll}
+                className="mt-3 rounded-full border border-line px-4 py-2 text-sm font-medium transition-colors hover:border-butter hover:bg-butter-soft"
+              >
+                {showAll ? "Show fewer" : `Show all ${more.length}`}
+              </button>
+            )}
           </div>
         </Reveal>
 

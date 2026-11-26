@@ -54,14 +54,6 @@ function HeroCard() {
       </div>
       <p className="mt-3 text-xs text-muted">{hero.card.caption}</p>
 
-      <div className="mt-5 flex flex-wrap gap-2 border-t border-line pt-4">
-        {hero.card.chips.map((c) => (
-          <span key={c} className="rounded-full bg-accent-2-soft px-3 py-1 text-xs font-medium text-accent-2">
-            {c}
-          </span>
-        ))}
-      </div>
-
       {/* small floating badge */}
       <motion.div
         aria-hidden="true"
