@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 import { journey } from "@/content";
 import { Reveal, Section } from "./Section";
+import { WorkList } from "./WorkList";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -15,6 +16,7 @@ export function Journey() {
 
   return (
     <Section id="journey" title={journey.title} lead={journey.lead} className="overflow-x-clip bg-paper-2">
+      <WorkList />
       <ol ref={ref} className="relative">
         {/* track + animated fill */}
         <div aria-hidden="true" className="absolute bottom-0 left-[11px] top-0 w-[2px] bg-line md:left-1/2 md:-translate-x-1/2" />
@@ -51,7 +53,7 @@ export function Journey() {
                   right ? "md:col-start-2" : "md:col-start-1 md:text-right"
                 }`}
               >
-                <p className={`flex items-center gap-2 text-sm font-medium text-accent ${right ? "" : "md:justify-end"}`}>
+                <p className={`flex items-center gap-2 font-mono text-xs font-medium text-accent ${right ? "" : "md:justify-end"}`}>
                   {r.years}
                   {r.current && (
                     <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-xs text-emerald-700 dark:text-emerald-300">Now</span>
@@ -87,7 +89,7 @@ export function Journey() {
               <div>
                 <p className="font-medium">{e.title}</p>
                 <p className="text-sm text-muted">{e.detail}</p>
-                <p className="mt-1 text-xs font-medium text-accent">{e.years}</p>
+                <p className="mt-1 font-mono text-xs font-medium text-accent">{e.years}</p>
               </div>
             </div>
           </Reveal>
