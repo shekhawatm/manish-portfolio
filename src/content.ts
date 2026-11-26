@@ -36,16 +36,47 @@ export const mascot = {
   hello: "Hi! I'm Ollie the owl. I spot great people for Manish. Click me for a rocket!",
   lines: {
     top: "Hoo! I'm Ollie 🦉",
+    numbers: "Whoa, look at those numbers! 😲",
     impact: "Those bars only go up 🚀",
     journey: "A decade-plus, one craft.",
+    bring: "Here's the good stuff 😊",
     lifecycle: "First hello to fifth anniversary.",
+    how: "Wise owl rules 😉",
     built: "All made with Claude!",
     focus: "Here's what's next.",
     recognition: "No chill. Literally.",
     recommendations: "People like him. A lot.",
-    life: "Marathons and home cooking.",
+    life: "Marathons… then naps 😴",
     contact: "Go on, say hi! (or click me 🚀)",
   } as Record<string, string>,
+  /** Ollie's mood in each section of the page */
+  moods: {
+    top: "happy",
+    numbers: "shocked",
+    impact: "excited",
+    journey: "proud",
+    bring: "happy",
+    lifecycle: "thinking",
+    how: "wink",
+    built: "excited",
+    focus: "thinking",
+    recognition: "shocked",
+    recommendations: "love",
+    life: "sleepy",
+    contact: "happy",
+  } as Record<string, string>,
+  /** What Ollie does on each click, in order (then it loops) */
+  reactions: [
+    { mood: "shocked", text: "Whoa! 😲" },
+    { mood: "excited", text: "Yay, let's go! 🎉", rocket: true },
+    { mood: "love", text: "Aww, thank you 💛" },
+    { mood: "dizzy", text: "Wheee, I'm dizzy 🌀" },
+    { mood: "wink", text: "Psst… say hi to Manish 😉" },
+    { mood: "sleepy", text: "Five more minutes… 😴" },
+    { mood: "thinking", text: "Hmm, who should we hire? 🤔" },
+    { mood: "proud", text: "Proud owl moment ✨" },
+    { mood: "happy", text: "Hoo-hoo! 🦉", rocket: true },
+  ] as { mood: "happy" | "excited" | "shocked" | "love" | "wink" | "sleepy" | "thinking" | "proud" | "dizzy"; text: string; rocket?: boolean }[],
 };
 
 export const hero = {
